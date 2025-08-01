@@ -1,0 +1,1066 @@
+#useless test
+test.js
+test2.js
+test.html
+
+
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Logs
+logs
+*.log
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Test files (if you want to keep test files, remove these lines)
+# test-*.js
+# *.test.js
+# *.spec.js
+
+# Build artifacts
+build/
+dist/
+
+# PM2 ecosystem file
+ecosystem.config.js
+
+# Docker
+.dockerignore
+Dockerfile.dev
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.cert
+
+# Config files with sensitive data
+config/production.js
+config/local.js
+
+# Upload directories
+uploads/
+public/uploads/
+
+# Session store
+sessions/
+
+# Cache
+.cache/
+cache/
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# ===== BACKEND API SPECIFIC EXCLUSIONS =====
+
+# Authentication & Security
+jwt-secret.txt
+auth-keys/
+private-keys/
+public-keys/
+secrets/
+.secrets/
+api-keys.json
+service-account-*.json
+google-credentials.json
+aws-credentials.json
+azure-credentials.json
+firebase-adminsdk-*.json
+
+# Database specific
+*.sql
+*.dump
+*.backup
+database-backup/
+db-backups/
+migrations/backup/
+seeds/backup/
+schema-backup/
+data-exports/
+database.json
+db-config.local.js
+connection-strings.txt
+
+# File uploads and storage
+uploads/
+public/uploads/
+temp-uploads/
+user-uploads/
+file-storage/
+media/
+assets/uploads/
+static/uploads/
+storage/
+attachments/
+
+# Session and cache
+sessions/
+.sessions/
+session-store/
+redis-data/
+memcached-data/
+cache-data/
+.cache-db/
+
+# API Documentation
+api-docs/
+swagger-docs/
+postman-collections/
+insomnia-collections/
+api-specs/
+openapi-specs/
+
+# Logs and monitoring
+logs/
+*.log
+access.log
+error.log
+debug.log
+app.log
+server.log
+api.log
+database.log
+security.log
+audit.log
+performance.log
+monitoring/
+metrics/
+health-checks/
+profiling/
+
+# Email templates and notifications
+email-templates/private/
+notification-templates/private/
+mail-templates/sensitive/
+sms-templates/
+push-notification-templates/
+
+# Third-party integrations
+integrations/private/
+webhooks/private/
+external-apis/
+payment-gateways/
+social-auth/
+oauth-configs/
+
+# Development and testing
+test-data/
+mock-data/
+fixtures/private/
+test-uploads/
+dev-uploads/
+staging-data/
+sample-data/private/
+
+# Configuration files
+config/local.js
+config/production.js
+config/staging.js
+config/development.local.js
+config/test.local.js
+.env.local
+.env.production
+.env.staging
+.env.development
+.env.test
+local-config.json
+app-config.local.json
+
+# SSL/TLS Certificates
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.pfx
+ssl/
+certificates/
+tls/
+ca-certificates/
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+backup/
+backups/
+archive/
+snapshots/
+
+# Process management
+ecosystem.config.js
+pm2.config.js
+.pm2/
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Docker specific
+.dockerignore.local
+Dockerfile.local
+Dockerfile.dev
+Dockerfile.prod
+docker-compose.override.yml
+docker-compose.local.yml
+docker-compose.dev.yml
+docker-compose.prod.yml
+.docker/
+
+# Kubernetes
+k8s/
+kubernetes/
+*.yaml.local
+*.yml.local
+helm-charts/private/
+
+# Cloud deployment
+.aws/
+.azure/
+.gcp/
+.heroku/
+.vercel/
+.netlify/
+.railway/
+.render/
+.digitalocean/
+
+# Infrastructure as Code
+terraform/
+.terraform/
+*.tfstate
+*.tfstate.backup
+terraform.tfvars
+terraform.tfvars.local
+pulumi/
+.pulumi/
+cloudformation/
+arm-templates/
+
+# Monitoring and observability
+.prometheus/
+.grafana/
+.jaeger/
+.zipkin/
+.elastic/
+.kibana/
+.logstash/
+newrelic.js.local
+datadog.yaml.local
+
+# Message queues and streaming
+.kafka/
+.rabbitmq/
+.redis/
+.nats/
+.pulsar/
+queue-data/
+stream-data/
+
+# Search engines
+.elasticsearch/
+.solr/
+.sphinx/
+search-indexes/
+search-data/
+
+# Analytics and tracking
+.google-analytics/
+.mixpanel/
+.amplitude/
+.segment/
+analytics-data/
+tracking-data/
+
+# Error tracking and debugging
+.sentry/
+.bugsnag/
+.rollbar/
+.airbrake/
+error-reports/
+crash-dumps/
+debug-dumps/
+
+# Performance monitoring
+.newrelic/
+.datadog/
+.dynatrace/
+.appdynamics/
+performance-data/
+profiling-data/
+
+# Security scanning
+.snyk/
+.whitesource/
+.sonarqube/
+.checkmarx/
+.veracode/
+security-reports/
+vulnerability-scans/
+
+# Load testing
+.artillery/
+.k6/
+.jmeter/
+load-test-results/
+performance-tests/
+
+# API testing
+.postman/
+.insomnia/
+.newman/
+api-test-results/
+integration-tests/
+
+# Database migrations
+migrations/local/
+migrations/temp/
+migration-backups/
+rollback-scripts/
+
+# Seed data
+seeds/private/
+seeds/production/
+seed-backups/
+
+# Reports and exports
+reports/
+exports/
+data-exports/
+csv-exports/
+json-exports/
+xml-exports/
+
+# Temporary processing
+processing/
+temp-processing/
+batch-jobs/
+scheduled-tasks/
+cron-jobs/
+
+# User data (if applicable)
+user-data/
+customer-data/
+personal-data/
+sensitive-data/
+gdpr-data/
+pii-data/
+
+# Compliance and audit
+compliance-reports/
+audit-logs/
+security-assessments/
+penetration-test-reports/
+vulnerability-assessments/
+
+# Legal and contracts
+legal-documents/
+contracts/
+agreements/
+licenses/private/
+terms-of-service/private/
+
+# Financial data
+financial-reports/
+payment-data/
+transaction-logs/
+billing-data/
+invoice-data/
+
+# HR and employee data
+employee-data/
+hr-records/
+payroll-data/
+performance-reviews/
+background-checks/
+
+# Intellectual property
+patents/
+trademarks/
+copyrights/
+trade-secrets/
+proprietary-algorithms/
+
+# Research and development
+research-data/
+experimental-features/
+prototype-code/
+innovation-projects/
+competitive-analysis/
+
+# Marketing and sales
+marketing-campaigns/
+customer-lists/
+sales-data/
+lead-data/
+conversion-tracking/
+
+# Operations data
+operational-metrics/
+system-performance/
+capacity-planning/
+resource-utilization/
+cost-analysis/
+
+# Vendor and supplier data
+vendor-contracts/
+supplier-agreements/
+procurement-data/
+purchase-orders/
+invoices/
+
+# Quality assurance
+qa-reports/
+test-results/
+bug-reports/
+quality-metrics/
+code-coverage/
+
+# Documentation (if sensitive)
+internal-docs/
+confidential-docs/
+strategy-documents/
+roadmaps/private/
+architecture-docs/private/
+
+# Training materials
+training-data/
+course-materials/
+certification-data/
+skill-assessments/
+learning-paths/
+
+# Communication logs
+chat-logs/
+email-archives/
+meeting-recordings/
+call-transcripts/
+communication-data/
+
+# Social media data
+social-media-data/
+sentiment-analysis/
+brand-monitoring/
+influencer-data/
+campaign-analytics/
+
+# IoT and sensor data
+sensor-data/
+device-logs/
+telemetry-data/
+iot-configurations/
+device-management/
+
+# Machine learning
+ml-models/
+training-data/
+datasets/private/
+model-artifacts/
+experiment-tracking/
+feature-stores/
+
+# Blockchain and crypto
+blockchain-data/
+wallet-data/
+smart-contracts/private/
+crypto-keys/
+transaction-data/
+
+# Gaming (if applicable)
+game-data/
+player-profiles/
+leaderboards/
+achievements/
+in-game-purchases/
+
+# Media and content
+media-files/private/
+content-library/
+digital-assets/
+copyrighted-material/
+licensed-content/
+
+# Localization
+translation-files/private/
+localization-data/
+cultural-adaptations/
+regional-configurations/
+language-packs/
+
+# Accessibility
+accessibility-reports/
+compliance-audits/
+user-testing-data/
+assistive-technology/
+inclusive-design/
+
+# Environmental data
+carbon-footprint/
+energy-consumption/
+sustainability-metrics/
+environmental-impact/
+green-initiatives/
+
+# Health and safety
+safety-reports/
+incident-data/
+risk-assessments/
+emergency-procedures/
+health-monitoring/
+
+# Disaster recovery
+disaster-recovery-plans/
+backup-strategies/
+recovery-procedures/
+business-continuity/
+crisis-management/
+
+# Governance and risk
+risk-registers/
+compliance-matrices/
+governance-frameworks/
+policy-documents/
+procedure-manuals/
+
+# Audit and assurance
+audit-trails/
+compliance-evidence/
+control-testing/
+assurance-reports/
+certification-data/
+
+# Vendor management
+vendor-assessments/
+due-diligence/
+risk-evaluations/
+performance-monitoring/
+contract-management/
+
+# Change management
+change-requests/
+impact-assessments/
+approval-workflows/
+implementation-plans/
+rollback-procedures/
+
+# Configuration management
+configuration-baselines/
+change-control/
+version-control/
+release-management/
+deployment-procedures/
+
+# Capacity management
+capacity-models/
+performance-baselines/
+growth-projections/
+resource-planning/
+scalability-analysis/
+
+# Service management
+service-catalogs/
+sla-agreements/
+performance-metrics/
+customer-satisfaction/
+service-improvements/
+
+# Knowledge management
+knowledge-bases/
+best-practices/
+lessons-learned/
+documentation-standards/
+information-architecture/
+
+# Project management
+project-plans/
+work-breakdown/
+resource-allocation/
+timeline-tracking/
+milestone-reporting/
+
+# Portfolio management
+portfolio-dashboards/
+investment-tracking/
+resource-optimization/
+strategic-alignment/
+value-realization/
+
+# Strategic planning
+strategic-plans/
+business-cases/
+feasibility-studies/
+market-analysis/
+competitive-intelligence/
+
+# Innovation management
+innovation-pipelines/
+idea-management/
+research-projects/
+patent-applications/
+technology-scouting/
+
+# Digital transformation
+transformation-roadmaps/
+digitization-projects/
+automation-initiatives/
+process-optimization/
+technology-adoption/
+
+# Agile and DevOps
+agile-artifacts/
+sprint-data/
+velocity-metrics/
+burndown-charts/
+retrospective-notes/
+
+# Continuous improvement
+improvement-initiatives/
+kaizen-events/
+process-optimization/
+efficiency-metrics/
+waste-elimination/
+
+# Quality management
+quality-systems/
+process-documentation/
+quality-metrics/
+customer-feedback/
+corrective-actions/
+
+# Risk management
+risk-assessments/
+mitigation-strategies/
+contingency-plans/
+insurance-policies/
+crisis-scenarios/
+
+# Compliance management
+regulatory-requirements/
+compliance-monitoring/
+reporting-obligations/
+certification-maintenance/
+audit-preparations/
+
+# Security management
+security-policies/
+incident-response/
+threat-intelligence/
+vulnerability-management/
+security-awareness/
+
+# Privacy management
+privacy-policies/
+data-protection/
+consent-management/
+subject-rights/
+privacy-impact-assessments/
+
+# Business intelligence
+bi-reports/
+data-warehouses/
+analytics-models/
+dashboard-configurations/
+reporting-templates/
+
+# Data management
+data-catalogs/
+data-lineage/
+data-quality/
+master-data/
+reference-data/
+
+# Enterprise architecture
+architecture-blueprints/
+technology-standards/
+integration-patterns/
+governance-models/
+transformation-plans/
+
+# Solution architecture
+solution-designs/
+technical-specifications/
+deployment-guides/
+integration-specifications/
+performance-requirements/
+
+# Infrastructure management
+infrastructure-inventory/
+capacity-planning/
+performance-monitoring/
+maintenance-schedules/
+upgrade-procedures/
+
+# Cloud management
+cloud-strategies/
+migration-plans/
+cost-optimization/
+resource-governance/
+multi-cloud-management/
+
+# Network management
+network-topology/
+bandwidth-planning/
+security-configurations/
+monitoring-tools/
+troubleshooting-guides/
+
+# Database management
+database-schemas/
+performance-tuning/
+backup-procedures/
+recovery-plans/
+maintenance-scripts/
+
+# Application management
+application-portfolios/
+lifecycle-management/
+performance-monitoring/
+user-experience/
+support-procedures/
+
+# Integration management
+integration-architectures/
+api-management/
+data-flows/
+message-routing/
+transformation-rules/
+
+# Testing management
+test-strategies/
+test-automation/
+performance-testing/
+security-testing/
+user-acceptance-testing/
+
+# Release management
+release-planning/
+deployment-procedures/
+rollback-strategies/
+environment-management/
+configuration-control/
+
+# Support management
+support-procedures/
+escalation-matrices/
+knowledge-bases/
+troubleshooting-guides/
+customer-communications/
+
+# Training management
+training-programs/
+skill-development/
+certification-tracking/
+competency-assessments/
+learning-analytics/
+
+# Communication management
+communication-strategies/
+stakeholder-engagement/
+change-communications/
+crisis-communications/
+feedback-mechanisms/
+
+# Partnership management
+partnership-strategies/
+collaboration-frameworks/
+joint-ventures/
+ecosystem-development/
+relationship-management/
+
+# Customer management
+customer-strategies/
+segmentation-models/
+journey-mapping/
+experience-design/
+loyalty-programs/
+
+# Product management
+product-strategies/
+roadmap-planning/
+feature-prioritization/
+user-research/
+market-analysis/
+
+# Marketing management
+marketing-strategies/
+campaign-management/
+brand-guidelines/
+content-strategies/
+performance-analytics/
+
+# Sales management
+sales-strategies/
+pipeline-management/
+territory-planning/
+performance-tracking/
+commission-structures/
+
+# Operations management
+operational-procedures/
+process-documentation/
+performance-metrics/
+continuous-improvement/
+efficiency-optimization/
+
+# Financial management
+financial-planning/
+budget-management/
+cost-control/
+revenue-tracking/
+profitability-analysis/
+
+# Human resources management
+hr-policies/
+recruitment-procedures/
+performance-management/
+compensation-planning/
+employee-development/
+
+# Legal management
+legal-frameworks/
+contract-templates/
+compliance-procedures/
+risk-mitigation/
+dispute-resolution/
+
+# Facilities management
+facility-planning/
+space-management/
+maintenance-procedures/
+security-systems/
+environmental-controls/
+
+# Supply chain management
+supplier-management/
+procurement-procedures/
+inventory-control/
+logistics-planning/
+distribution-strategies/
+
+# Environmental management
+environmental-policies/
+sustainability-initiatives/
+carbon-management/
+waste-reduction/
+resource-conservation/
+
+# Health and safety management
+safety-procedures/
+risk-assessments/
+incident-management/
+emergency-response/
+wellness-programs/
+
+# Crisis management
+crisis-plans/
+emergency-procedures/
+business-continuity/
+disaster-recovery/
+communication-protocols/
+
+# Stakeholder management
+stakeholder-mapping/
+engagement-strategies/
+communication-plans/
+relationship-building/
+influence-management/
+
+# Governance management
+governance-structures/
+decision-frameworks/
+accountability-mechanisms/
+oversight-procedures/
+transparency-initiatives/
+
+# Ethics management
+ethical-guidelines/
+code-of-conduct/
+integrity-programs/
+whistleblower-procedures/
+ethical-decision-making/
+
+# Sustainability management
+sustainability-strategies/
+environmental-impact/
+social-responsibility/
+economic-viability/
+stakeholder-value/
+
+# Innovation management
+innovation-strategies/
+creativity-processes/
+experimentation-frameworks/
+technology-scouting/
+intellectual-property/
+
+# Knowledge management
+knowledge-strategies/
+information-architecture/
+content-management/
+expertise-location/
+learning-systems/
+
+# Change management
+change-strategies/
+transformation-planning/
+stakeholder-engagement/
+communication-management/
+resistance-management/
+
+# Performance management
+performance-frameworks/
+measurement-systems/
+improvement-initiatives/
+benchmarking-studies/
+best-practice-sharing/
+
+# Value management
+value-propositions/
+benefit-realization/
+cost-benefit-analysis/
+return-on-investment/
+value-optimization/
+
+# Future-ready management
+scenario-planning/
+trend-analysis/
+emerging-technologies/
+adaptive-strategies/
+resilience-building/
