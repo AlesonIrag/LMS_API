@@ -2,12 +2,12 @@ const db = require('./config/database');
 
 async function checkFaculty() {
   try {
-    console.log('Checking faculty in database...\n');
+    console.log('🔍 Checking faculty in database...\n');
 
     // Check faculty table
     const [faculty] = await db.execute('SELECT FacultyID, FullName, Email, Department, Position, Status, CreatedAt FROM faculty ORDER BY FacultyID');
     
-    console.log('Current Faculty:');
+    console.log('👥 Current Faculty:');
     if (faculty.length === 0) {
       console.log('   No faculty found in database');
     } else {
@@ -31,7 +31,7 @@ async function checkFaculty() {
         LIMIT 10
       `);
 
-      console.log('\nRecent Faculty Audit Logs:');
+      console.log('\n📋 Recent Faculty Audit Logs:');
       if (logs.length === 0) {
         console.log('   No audit logs found');
       } else {
@@ -40,7 +40,7 @@ async function checkFaculty() {
         });
       }
     } catch (error) {
-      console.log('\nFaculty audit logs table not found!');
+      console.log('\n❌ Faculty audit logs table not found!');
       console.log('   Please run the updated dblibrary.sql file to create the facultyauditlogs table.');
       console.log('   Or run this SQL command:');
       console.log(`
@@ -60,7 +60,7 @@ CREATE TABLE facultyauditlogs (
 
     // Check departments
     const [departments] = await db.execute('SELECT DISTINCT Department FROM faculty WHERE Department IS NOT NULL ORDER BY Department');
-    console.log('\nDepartments:');
+    console.log('\n🏢 Departments:');
     if (departments.length === 0) {
       console.log('   No departments found');
     } else {
@@ -71,7 +71,7 @@ CREATE TABLE facultyauditlogs (
 
     // Check positions
     const [positions] = await db.execute('SELECT DISTINCT Position FROM faculty WHERE Position IS NOT NULL ORDER BY Position');
-    console.log('\nPositions:');
+    console.log('\n💼 Positions:');
     if (positions.length === 0) {
       console.log('   No positions found');
     } else {
@@ -80,10 +80,10 @@ CREATE TABLE facultyauditlogs (
       });
     }
 
-    console.log('\nDatabase check completed!');
+    console.log('\n✅ Database check completed!');
 
   } catch (error) {
-    console.error('Database check failed:', error.message);
+    console.error('❌ Database check failed:', error.message);
   } finally {
     process.exit(0);
   }

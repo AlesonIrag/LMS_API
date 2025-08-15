@@ -2,7 +2,7 @@ const mysql = require('mysql2');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
-console.log('Adding test student for authentication testing...');
+console.log('🔍 Adding test student for authentication testing...');
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST || 'localhost',
@@ -25,10 +25,10 @@ async function addTestStudent() {
       password: 'password123' // Simple password for testing
     };
 
-    console.log('Hashing password...');
+    console.log('🔐 Hashing password...');
     const hashedPassword = await bcrypt.hash(studentData.password, 10);
 
-    console.log('Student data to insert:');
+    console.log('📝 Student data to insert:');
     console.log(`   Student ID: ${studentData.studentID}`);
     console.log(`   Name: ${studentData.fullName}`);
     console.log(`   Course: ${studentData.course} Year ${studentData.yearLevel} Section ${studentData.section}`);
@@ -40,29 +40,29 @@ async function addTestStudent() {
     const checkQuery = 'SELECT StudentID FROM Students WHERE StudentID = ?';
     db.query(checkQuery, [studentData.studentID], (err, results) => {
       if (err) {
-        console.error('Error checking existing student:', err.message);
+        console.error('❌ Error checking existing student:', err.message);
         db.end();
         return;
       }
 
       if (results.length > 0) {
-        console.log('Test student already exists. Updating password...');
+        console.log('⚠️  Test student already exists. Updating password...');
         
         const updateQuery = 'UPDATE Students SET Password = ? WHERE StudentID = ?';
         db.query(updateQuery, [hashedPassword, studentData.studentID], (err, result) => {
           if (err) {
-            console.error('Error updating student:', err.message);
+            console.error('❌ Error updating student:', err.message);
           } else {
-            console.log('Test student password updated successfully!');
+            console.log('✅ Test student password updated successfully!');
             console.log('');
-            console.log('Test credentials:');
+            console.log('🧪 Test credentials:');
             console.log(`   Student ID: ${studentData.studentID}`);
             console.log(`   Password: ${studentData.password}`);
           }
           db.end();
         });
       } else {
-        console.log('Adding new test student...');
+        console.log('➕ Adding new test student...');
         
         const insertQuery = `
           INSERT INTO Students (
@@ -83,11 +83,11 @@ async function addTestStudent() {
           hashedPassword
         ], (err, result) => {
           if (err) {
-            console.error('Error inserting student:', err.message);
+            console.error('❌ Error inserting student:', err.message);
           } else {
-            console.log('Test student added successfully!');
+            console.log('✅ Test student added successfully!');
             console.log('');
-            console.log('Test credentials:');
+            console.log('🧪 Test credentials:');
             console.log(`   Student ID: ${studentData.studentID}`);
             console.log(`   Password: ${studentData.password}`);
           }
@@ -97,17 +97,17 @@ async function addTestStudent() {
     });
 
   } catch (error) {
-    console.error('Error:', error.message);
+    console.error('❌ Error:', error.message);
     db.end();
   }
 }
 
 db.connect((err) => {
   if (err) {
-    console.error('Connection failed:', err.message);
+    console.error('❌ Connection failed:', err.message);
     process.exit(1);
   }
 
-  console.log('Database connection successful!');
+  console.log('✅ Database connection successful!');
   addTestStudent();
 });
