@@ -265,21 +265,73 @@ router.get('/get-admin/:adminID', validateAdminId, asyncHandler(async (req, res)
   });
 }));
 
-// GET /get-all-admins
+// GET /get-all-admins - With pagination support
 router.get('/get-all-admins', asyncHandler(async (req, res) => {
+  console.log('👥 GET /get-all-admins - With pagination support');
+
+  // Extract pagination parameters from query string
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = (page - 1) * limit;
+
+  console.log('📄 Pagination params:', { page, limit, offset });
+
+  // Get total count of admins
+  const countQuery = 'SELECT COUNT(*) as total FROM admins';
+  const [countResult] = await db.execute(countQuery);
+  const totalAdmins = countResult[0].total;
+  const totalPages = Math.ceil(totalAdmins / limit);
+
+  console.log('📊 Total admins:', totalAdmins, 'Total pages:', totalPages);
+
+  // Get paginated admins
   const selectQuery = `
     SELECT AdminID, FirstName, LastName, MiddleInitial, Suffix, FullName, Email, Role, Status, CreatedAt, UpdatedAt
     FROM admins
     ORDER BY Role, LastName, FirstName ASC
+    LIMIT ? OFFSET ?
   `;
 
-  const [results] = await db.execute(selectQuery);
+  const [results] = await db.execute(selectQuery, [limit, offset]);
+  console.log(`Found ${results.length} admins for page ${page}`);
+
+  // Get stats for all admins (not just current page)
+  const statsQuery = `
+    SELECT 
+      COUNT(*) as totalAdmins,
+      SUM(CASE WHEN Status = 'Active' THEN 1 ELSE 0 END) as activeAdmins,
+      SUM(CASE WHEN Status = 'Inactive' THEN 1 ELSE 0 END) as inactiveAdmins,
+      SUM(CASE WHEN Role = 'Super Admin' THEN 1 ELSE 0 END) as superAdmins,
+      SUM(CASE WHEN Role = 'Librarian' THEN 1 ELSE 0 END) as librarians,
+      SUM(CASE WHEN Role = 'Librarian Staff' THEN 1 ELSE 0 END) as librarianStaff,
+      SUM(CASE WHEN Role = 'Data Center Admin' THEN 1 ELSE 0 END) as dataCenterAdmins
+    FROM admins
+  `;
+  const [statsResult] = await db.execute(statsQuery);
+  const stats = statsResult[0];
 
   res.json({
     success: true,
-    message: '✅ Admins retrieved successfully',
+    message: `✅ Retrieved ${results.length} admins for page ${page} of ${totalPages}`,
     count: results.length,
-    data: results
+    data: results,
+    pagination: {
+      currentPage: page,
+      itemsPerPage: limit,
+      totalAdmins: totalAdmins,
+      totalPages: totalPages,
+      hasNextPage: page < totalPages,
+      hasPreviousPage: page > 1
+    },
+    stats: {
+      totalAdmins: parseInt(stats.totalAdmins),
+      activeAdmins: parseInt(stats.activeAdmins),
+      inactiveAdmins: parseInt(stats.inactiveAdmins),
+      superAdmins: parseInt(stats.superAdmins),
+      librarians: parseInt(stats.librarians),
+      librarianStaff: parseInt(stats.librarianStaff),
+      dataCenterAdmins: parseInt(stats.dataCenterAdmins)
+    }
   });
 }));
 
@@ -657,8 +709,8 @@ router.get('/profile/:adminId', asyncHandler(async (req, res) => {
   const query = `
     SELECT AdminID, FirstName, MiddleInitial, LastName, Suffix, FullName,
            Email, Role, Status, ProfilePhoto, CreatedAt, UpdatedAt
-    FROM admins
-    WHERE adminID = ? AND Status = 'Active'
+    FROM Admins
+    WHERE AdminID = ? AND Status = 'Active'
   `;
 
   const [rows] = await db.execute(query, [adminId]);
@@ -674,8 +726,8 @@ router.get('/profile/:adminId', asyncHandler(async (req, res) => {
 
   // Convert full URLs to relative URLs for frontend proxy
   if (admin.ProfilePhoto) {
-    if (admin.ProfilePhoto.startsWith('https://benedictocollege-library.org/api/api')) {
-      admin.ProfilePhoto = admin.ProfilePhoto.replace('https://benedictocollege-library.org', '');
+    if (admin.ProfilePhoto.startsWith('http://localhost:3000/api/')) {
+      admin.ProfilePhoto = admin.ProfilePhoto.replace('http://localhost:3000', '');
     }
   }
 
@@ -721,7 +773,7 @@ router.put('/profile/:adminId', asyncHandler(async (req, res) => {
   }
 
   // Check if admin exists
-  const checkQuery = `SELECT AdminID FROM admins WHERE AdminID = ? AND Status = 'Active'`;
+  const checkQuery = `SELECT AdminID FROM Admins WHERE AdminID = ? AND Status = 'Active'`;
   const [existingAdmin] = await db.execute(checkQuery, [adminId]);
 
   if (existingAdmin.length === 0) {
@@ -734,7 +786,7 @@ router.put('/profile/:adminId', asyncHandler(async (req, res) => {
   // Update admin profile
   const fullName = combineNameFields(firstName, lastName);
   const updateQuery = `
-    UPDATE admins
+    UPDATE Admins
     SET FirstName = ?, LastName = ?, FullName = ?, Email = ?, ProfilePhoto = ?, UpdatedAt = CURRENT_TIMESTAMP
     WHERE AdminID = ?
   `;

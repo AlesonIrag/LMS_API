@@ -49,10 +49,7 @@ const corsOptions = {
       'http://127.0.0.1:4200',
       'http://127.0.0.1:3000',
       'https://your-frontend-domain.com',
-      'https://your-backend-domain.com',
-      'http://209.25.142.16:3058',
-      'https://benedictocollege-library.org',
-      'https://api.benedictocollege-library.org'
+      'https://your-backend-domain.com'
     ],
   credentials: true,
   optionsSuccessStatus: 200,
@@ -83,7 +80,7 @@ app.use('/api/v1/uploads/profile-photos', cors({
     'http://127.0.0.1:4200',
     'http://127.0.0.1:3000',
     'https://benedictocollege-library.org',
-    'http://benedictocollege-library.org'
+    'https://benedictocollege-library.org:3000'
   ],
   methods: ['GET', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
@@ -130,7 +127,8 @@ app.use(notFoundHandler);
 
 // Start server
 const PORT = process.env.PORT || 3000;
-const HOST = '0.0.0.0';
+const HOST = process.env.HOST || '0.0.0.0'; // Render requires binding to 0.0.0.0
+
 app.listen(PORT, HOST, async () => {
   // Log server start
   weatherLogger.logServerStart(PORT);
@@ -146,9 +144,7 @@ app.listen(PORT, HOST, async () => {
   }
 
   weatherLogger.info('Backend server initialization complete');
-
-  console.log(`Server running on http://${HOST}:${PORT}`);
 });
 
-
-
+// Export for Vercel serverless functions
+module.exports = app;

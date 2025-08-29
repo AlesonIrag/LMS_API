@@ -9,7 +9,7 @@ const securityHeaders = helmet({
       defaultSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       scriptSrc: ["'self'"],
-      imgSrc: ["'self'", "data:", "https:", "http://localhost:3000", "http://localhost:4200", "https://benedictocollege-library.org", "https://benedictocollege-library.org/api/"],
+      imgSrc: ["'self'", "data:", "https:", "http://localhost:3000", "http://localhost:4200"],
     },
   },
   hsts: {

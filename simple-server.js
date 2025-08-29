@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:4200', 'http://localhost:3000', 'https://api.benedictocollege-library.org' , 'https://benedictocollege-library.org'],
+  origin: ['http://localhost:4200', 'http://localhost:3000'],
   credentials: true
 }));
 app.use(express.json());

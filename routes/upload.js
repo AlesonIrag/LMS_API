@@ -272,7 +272,7 @@ router.post('/admin-profile-photo/:adminId', upload.single('profilePhoto'), asyn
 
     // Update admin record in database with new profile photo URL
     const db = require('../config/database');
-    const updateQuery = `UPDATE admins SET ProfilePhoto = ? WHERE AdminID = ?`;
+    const updateQuery = `UPDATE Admins SET ProfilePhoto = ? WHERE AdminID = ?`;
     await db.execute(updateQuery, [imageUrl, adminId]);
 
     console.log(`✅ Profile photo uploaded for admin ${adminId}: ${imageUrl}`);
@@ -311,7 +311,7 @@ router.delete('/admin-profile-photo/:adminId', async (req, res) => {
     const db = require('../config/database');
 
     // Get current profile photo URL from database
-    const selectQuery = `SELECT ProfilePhoto FROM admins WHERE AdminID = ?`;
+    const selectQuery = `SELECT ProfilePhoto FROM Admins WHERE AdminID = ?`;
     const [rows] = await db.execute(selectQuery, [adminId]);
 
     if (rows.length === 0) {
@@ -335,7 +335,7 @@ router.delete('/admin-profile-photo/:adminId', async (req, res) => {
     }
 
     // Update database to remove profile photo URL
-    const updateQuery = `UPDATE admins SET ProfilePhoto = NULL WHERE AdminID = ?`;
+    const updateQuery = `UPDATE Admins SET ProfilePhoto = NULL WHERE AdminID = ?`;
     await db.execute(updateQuery, [adminId]);
 
     res.json({
