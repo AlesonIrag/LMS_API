@@ -1,0 +1,187 @@
+-- CLEANUP
+DROP TABLE IF EXISTS AdminAuditLogs, Notifications, UserTokens, BorrowHistory, Reservations, Fines, Transactions, BookCopies;
+DROP TABLE IF EXISTS SystemLogs, Reports, Books;
+DROP TABLE IF EXISTS Faculty, Students, Admins;
+
+-- STUDENTS
+CREATE TABLE Students (
+    StudentID VARCHAR(10) PRIMARY KEY,
+    FullName VARCHAR(255) NOT NULL,
+    Course VARCHAR(100),
+    YearLevel INT,
+    Section VARCHAR(50),
+    Email VARCHAR(255) UNIQUE NOT NULL,
+    PhoneNumber VARCHAR(20),
+    Password VARCHAR(255) NOT NULL,
+    EnrollmentStatus ENUM('Active', 'Inactive') NOT NULL DEFAULT 'Active',
+    AccountStatus ENUM('Allowed', 'Blocked') NOT NULL DEFAULT 'Allowed',
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+--  FACULTY
+CREATE TABLE Faculty (
+    FacultyID VARCHAR(10) PRIMARY KEY,
+    FullName VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) UNIQUE NOT NULL,
+    PhoneNumber VARCHAR(20),
+    Password VARCHAR(255) NOT NULL,
+    Department VARCHAR(100),
+    Position VARCHAR(100),
+    Status ENUM('Active', 'Inactive') NOT NULL DEFAULT 'Active',
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- ADMINS
+CREATE TABLE Admins (
+    AdminID INT PRIMARY KEY AUTO_INCREMENT,
+    FullName VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) UNIQUE NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Role ENUM('Super Admin', 'Data Center Admin', 'Librarian', 'Librarian Staff') NOT NULL DEFAULT 'Librarian',
+    Status ENUM('Active', 'Inactive') NOT NULL DEFAULT 'Active',
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- BOOKS
+CREATE TABLE Books (
+    BookID INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(255) NOT NULL,
+    Author VARCHAR(255),
+    ISBN VARCHAR(50),
+    Category VARCHAR(100),
+    Subject VARCHAR(100),
+    PublishedYear INT,
+    CopyrightYear INT,
+    Publisher VARCHAR(255),
+    CallNumber VARCHAR(50),
+    DeweyDecimal VARCHAR(50),
+    Copies INT DEFAULT 1,
+    Remarks TEXT,
+    Status ENUM('Available', 'Borrowed', 'Lost', 'Damaged') DEFAULT 'Available',
+    ShelfLocation VARCHAR(100),
+    AcquisitionDate DATE,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+--  BOOK COPIES
+CREATE TABLE BookCopies (
+    CopyID INT PRIMARY KEY AUTO_INCREMENT,
+    BookID INT NOT NULL,
+    Barcode VARCHAR(50) UNIQUE,
+    `Condition` ENUM('New', 'Good', 'Worn', 'Damaged') DEFAULT 'Good',
+    CopyStatus ENUM('Available', 'Borrowed', 'Lost', 'Archived') DEFAULT 'Available',
+    FOREIGN KEY (BookID) REFERENCES Books(BookID) ON DELETE CASCADE
+);
+
+-- 🔁 TRANSACTIONS
+CREATE TABLE Transactions (
+    TransactionID INT PRIMARY KEY AUTO_INCREMENT,
+    StudentID VARCHAR(10) NULL,
+    FacultyID VARCHAR(10) NULL,
+    BookID INT NOT NULL,
+    BorrowDate DATE NOT NULL,
+    DueDate DATE NOT NULL,
+    ReturnDate DATE,
+    Status ENUM('Pending', 'Borrowed', 'Returned', 'Overdue') DEFAULT 'Pending',
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID) ON DELETE SET NULL,
+    FOREIGN KEY (FacultyID) REFERENCES Faculty(FacultyID) ON DELETE SET NULL,
+    FOREIGN KEY (BookID) REFERENCES Books(BookID) ON DELETE CASCADE
+);
+
+-- RESERVATIONS
+CREATE TABLE Reservations (
+    ReservationID INT PRIMARY KEY AUTO_INCREMENT,
+    BookID INT NOT NULL,
+    StudentID VARCHAR(10) NULL,
+    FacultyID VARCHAR(10) NULL,
+    ReservedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Status ENUM('Pending', 'Approved', 'Declined', 'Expired') DEFAULT 'Pending',
+    FOREIGN KEY (BookID) REFERENCES Books(BookID) ON DELETE CASCADE,
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID) ON DELETE SET NULL,
+    FOREIGN KEY (FacultyID) REFERENCES Faculty(FacultyID) ON DELETE SET NULL
+);
+
+-- FINES
+CREATE TABLE Fines (
+    FineID INT PRIMARY KEY AUTO_INCREMENT,
+    StudentID VARCHAR(10) NULL,
+    FacultyID VARCHAR(10) NULL,
+    TransactionID INT NOT NULL,
+    Amount FLOAT NOT NULL,
+    DueDate DATE NOT NULL,
+    PaidStatus ENUM('Paid', 'Unpaid') DEFAULT 'Unpaid',
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID) ON DELETE SET NULL,
+    FOREIGN KEY (FacultyID) REFERENCES Faculty(FacultyID) ON DELETE SET NULL,
+    FOREIGN KEY (TransactionID) REFERENCES Transactions(TransactionID) ON DELETE CASCADE
+);
+
+-- BORROW HISTORY
+CREATE TABLE BorrowHistory (
+    HistoryID INT PRIMARY KEY AUTO_INCREMENT,
+    BookID INT NOT NULL,
+    BorrowerID VARCHAR(10) NOT NULL,
+    BorrowerType ENUM('Student', 'Faculty'),
+    BorrowedAt TIMESTAMP,
+    FOREIGN KEY (BookID) REFERENCES Books(BookID) ON DELETE CASCADE
+);
+
+-- NOTIFICATIONS
+CREATE TABLE Notifications (
+    NotificationID INT PRIMARY KEY AUTO_INCREMENT,
+    RecipientID VARCHAR(10) NOT NULL,
+    RecipientType ENUM('Student', 'Faculty', 'Admin'),
+    Title VARCHAR(255),
+    Message TEXT,
+    IsRead BOOLEAN DEFAULT FALSE,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- USER TOKENS
+CREATE TABLE UserTokens (
+    TokenID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID VARCHAR(10) NOT NULL,
+    UserType ENUM('Student', 'Faculty', 'Admin') NOT NULL,
+    Token VARCHAR(100) NOT NULL,
+    Expiry DATETIME NOT NULL,
+    IsUsed BOOLEAN DEFAULT FALSE
+);
+
+-- REPORTS
+CREATE TABLE Reports (
+    ReportID INT PRIMARY KEY AUTO_INCREMENT,
+    ReportType VARCHAR(100),
+    GeneratedBy INT,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (GeneratedBy) REFERENCES Admins(AdminID) ON DELETE SET NULL
+);
+
+--  SYSTEM LOGS
+CREATE TABLE SystemLogs (
+    LogID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID VARCHAR(10) NOT NULL,
+    UserType ENUM('Student', 'Faculty', 'Admin') NOT NULL,
+    Action TEXT,
+    ActionType ENUM('Login', 'Logout', 'Borrow', 'Return', 'View', 'Update', 'Other') DEFAULT 'Other',
+    IPAddress VARCHAR(45),
+    DeviceInfo TEXT,
+    Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ADMIN AUDIT LOGS
+CREATE TABLE AdminAuditLogs (
+    LogID INT PRIMARY KEY AUTO_INCREMENT,
+    AdminID INT NOT NULL,
+    Action VARCHAR(255),
+    AffectedTable VARCHAR(100),
+    AffectedID INT,
+    Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (AdminID) REFERENCES Admins(AdminID) ON DELETE CASCADE
+);

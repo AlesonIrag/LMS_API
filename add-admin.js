@@ -5,28 +5,28 @@ const BASE_URL = 'http://localhost:3000/api/v1/adminauth';
 
 async function addAdmin(adminData) {
   try {
-    console.log('Creating admin...');
+    console.log('📝 Creating admin...');
     console.log('Data:', JSON.stringify(adminData, null, 2));
 
     const response = await axios.post(`${BASE_URL}/register-admin`, adminData);
     
-    console.log('Admin created successfully!');
+    console.log('✅ Admin created successfully!');
     console.log('Response:', JSON.stringify(response.data, null, 2));
     
     return response.data;
   } catch (error) {
     if (error.response) {
-      console.error('Failed to create admin:', error.response.data);
+      console.error('❌ Failed to create admin:', error.response.data);
       console.error('Status:', error.response.status);
     } else {
-      console.error('Error:', error.message);
+      console.error('❌ Error:', error.message);
     }
     return null;
   }
 }
 
 async function main() {
-  console.log('Admin Creation Tool\n');
+  console.log('🚀 Admin Creation Tool\n');
 
   // Example admin data - modify as needed
   const newAdmin = {
@@ -55,16 +55,16 @@ async function main() {
   };
 
   // Create the admins
-  console.log('Creating Data Center Admin...');
+  console.log('1️⃣ Creating Data Center Admin...');
   await addAdmin(newAdmin);
 
-  console.log('\nCreating Librarian...');
+  console.log('\n2️⃣ Creating Librarian...');
   await addAdmin(librarian);
 
-  console.log('\nCreating Library Staff...');
+  console.log('\n3️⃣ Creating Library Staff...');
   await addAdmin(staff);
 
-  console.log('\nAdmin creation completed!');
+  console.log('\n🎉 Admin creation completed!');
 }
 
 // Check if server is running first
@@ -73,7 +73,7 @@ async function checkServer() {
     await axios.get('http://localhost:3000/');
     return true;
   } catch (error) {
-    console.error('Server not running. Start with: npm start');
+    console.error('❌ Server not running. Start with: npm start');
     return false;
   }
 }

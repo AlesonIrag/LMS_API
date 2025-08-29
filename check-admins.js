@@ -2,12 +2,12 @@ const db = require('./config/database');
 
 async function checkAdmins() {
   try {
-    console.log('Checking admins in database...\n');
+    console.log('🔍 Checking admins in database...\n');
 
     // Check admins table
     const [admins] = await db.execute('SELECT AdminID, FullName, Email, Role, Status, CreatedAt FROM admins ORDER BY AdminID');
     
-    console.log('Current Admins:');
+    console.log('👥 Current Admins:');
     if (admins.length === 0) {
       console.log('   No admins found in database');
     } else {
@@ -30,7 +30,7 @@ async function checkAdmins() {
       LIMIT 10
     `);
 
-    console.log('\nRecent Admin Audit Logs:');
+    console.log('\n📋 Recent Admin Audit Logs:');
     if (logs.length === 0) {
       console.log('   No audit logs found');
     } else {
@@ -39,10 +39,10 @@ async function checkAdmins() {
       });
     }
 
-    console.log('\nDatabase check completed!');
+    console.log('\n✅ Database check completed!');
 
   } catch (error) {
-    console.error('Database check failed:', error.message);
+    console.error('❌ Database check failed:', error.message);
   } finally {
     process.exit(0);
   }
