@@ -49,7 +49,9 @@ const corsOptions = {
       'http://127.0.0.1:4200',
       'http://127.0.0.1:3000',
       'https://your-frontend-domain.com',
-      'https://your-backend-domain.com'
+      'https://your-backend-domain.com',
+      'https://benedictocollege-library.org',
+      'http://benedictocollege-library.org'
     ],
   credentials: true,
   optionsSuccessStatus: 200,
@@ -80,7 +82,7 @@ app.use('/api/v1/uploads/profile-photos', cors({
     'http://127.0.0.1:4200',
     'http://127.0.0.1:3000',
     'https://benedictocollege-library.org',
-    'https://benedictocollege-library.org:3000'
+    'http://benedictocollege-library.org'
   ],
   methods: ['GET', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
