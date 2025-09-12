@@ -1,0 +1,20 @@
+1. Hotel Booking System (MATA GROUP)
+
+The hotel booking system is experiencing several noticeable issues that affect both usability and reliability. One of the most confusing problems is that the dark mode and light mode functions are reversed, which frustrates users who expect them to behave normally. The system also does not allow editing of the address field, and it fails to automatically capitalize the first letter of names, which makes records look unpolished. On top of that, the fonts are too small, which hurts readability, and the layout becomes deformed when viewed on different devices, showing that responsiveness has not been properly handled. Some links inside the platform do not work at all, and Gmail requests are being misrouted within the system, which could cause customers to miss important booking confirmations. The booking flow itself is not stable, and there are repeated complaints about accommodations not processing correctly. Most concerning is that the API routes are not secured, which exposes the platform to potential security risks.
+
+
+2. Inventory System (Villar Group)
+
+The inventory system created by the Villar Group also presents multiple problems. While the team has introduced a new front-end design, it lacks polish and would benefit from adding a dark mode for a better user experience. The bigger issue is duplication across the system. Stocks appear more than once, disposal records are duplicated, and there are even repeated viewing icons that display the same output. This redundancy not only clutters the interface but also damages the accuracy of inventory data. There are also cases where items with completely different details are assigned the same serial number, which undermines tracking integrity. Responsiveness is another weakness since the system does not properly adapt across devices. Certain sections, particularly those involving heavy actions, would function much better in a landscape orientation, but this has not been implemented.
+
+3. Registrar System (Estorco Group)
+
+The Estorco system, which handles student and admin records, has some serious functional flaws. Currently, it only provides a single admin side, which limits flexibility and role management. Duplication occurs repeatedly in names, student lists, registration entries, and even admin records, which leads to confusion and inflated databases. Pending files often fail to update correctly, and rejected payments cannot be reprocessed, which leaves both administrators and users without a way to resolve issues. At times, the system fails to retrieve certain data, forcing users to refresh the page just to see updates. It also allows multiple requests at once, when ideally it should restrict to one request to avoid overloading or duplicating records.
+
+4. Voting System (Kerbi Group)
+
+The Kerbi system is struggling with even its most basic functionality. Users are unable to type or add new candidates into the input fields, which completely blocks the core purpose of the module. Creating a new election is also buggy, leaving the system unreliable for its intended use. Meanwhile, the Nathaniel or Pacucua project lacks clear details, so the issues are difficult to evaluate without further clarification.
+
+5. Grading System (Kurt Group)
+
+Finally, the Kurt Group’s project is still incomplete and remains static instead of being dynamic. The registration feature is still pending, which shows that integration with the registrar has not been completed. The system also handles requests poorly, since it only works when there are two lacking entries or fewer, while anything more than that creates problems. There should be an administrative option to unlock or manage these requests, but that feature is missing. From a design perspective, the interface looks cramped and needs more spacing between boxes to make it readable and visually organized. Overall, while there is visible effort across all projects, the systems still require a lot of refinement, better responsiveness, and stricter data handling before they can be considered reliable solutions.
